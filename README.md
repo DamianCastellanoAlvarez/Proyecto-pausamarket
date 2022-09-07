@@ -63,7 +63,7 @@ Para este proyecto se agregaron Frameworks como Bt y ademas se dio estilo con CS
 
 ### Deployment
 
+https://github.com/DamianCastellanoAlvarez/Proyecto-pausamarket.git
 
 
-### `npm run build` fails to minify
 
