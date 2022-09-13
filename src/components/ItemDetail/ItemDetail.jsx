@@ -1,11 +1,25 @@
 import ItemCount from "../ItemCount/ItemCount";
 import { Card, CardBody, CardHeader, CardText, CardTitle } from "reactstrap";
-
+import { useState, useContext } from "react";
+import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 
 const ItemDetail = ( {item} ) => {
-    const { name, price, img, detalle, stock } = item;
+    const { name, price, img, stock } = item;
+    const {addToCart, isInCart} = useContext(CartContext)
+    const [cuenta, setCuenta] = useState(1)
+    const [add, setAdd] = useState (false)
+    const {cart, cartTotal, emptyCart, cartQuantity} = useContext(CartContext)
 
+    const agregaralcarrito = () =>{
+        const itemToCart = {
+            id: item.id,
+            nombre: item.name,
+            Precio: item.price
+        }
+        addToCart(itemToCart)
+    }
 
     return(
         <div className="cart">
@@ -28,9 +42,19 @@ const ItemDetail = ( {item} ) => {
                             {price}
                         </CardTitle>
                             <div className="detalle d-flex justify-content-center">
-                                <ItemCount initial={1} stock={stock} />
+                            <ItemCount 
+                            cart={cart}
+                            initial={1} 
+                            stock={stock} 
+                            addToCart={addToCart} 
+                            cuenta={agregaralcarrito}
+                            setCounter= {setCuenta} />
                             </div>        
                         </CardBody>
+                        <div className="d-flex justify-content-evenly">
+                            
+                            <Link to='/cart'><button className="btn btn-info">Finalizar Compra</button></Link>
+                        </div>
                 </Card>
             </div>
                 <div className="d-flex justify-content-end">

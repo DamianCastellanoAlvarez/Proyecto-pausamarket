@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import '../ItemCount/ItemCount.css';
 
 
-const ItemCount = ({stock, initial}) => {
+const ItemCount = ({stock, initial, cart, cartQuantity}) => {
     const [cuenta, setCuenta] = useState(initial)
 
     const sumar = () =>{
@@ -14,8 +14,7 @@ const ItemCount = ({stock, initial}) => {
         setCuenta(Math.max (cuenta - 1, 1))
     }
 
-    const onAdd = () => {
-        alert(`Agregaste al carrito ${cuenta} productos de PAUSA MARKET`)
+    const addToCart = () => {
     }
 
     return (
@@ -26,7 +25,7 @@ const ItemCount = ({stock, initial}) => {
                 <button className="btn btn-success" onClick={sumar}>+</button>
             </div>
             <div className="d-flex justify-content-evenly">
-                <button type="button" className="btn btn-danger" onClick={onAdd}>Agregar al Carrito</button>
+                <button type="button" className="btn btn-danger" onClick={() => addToCart(cart, cartQuantity)}>Agregar al Carrito</button>
             </div>
         </div>
     )

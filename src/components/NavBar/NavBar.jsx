@@ -14,9 +14,9 @@ const NavBar = () =>{
     const toggle = () => setDropdownOpen(!dropdownOpen);
 
     return (
-        <>
+        <div className='navb'>
             <div>
-                <img src={logo} alt="logo"  className="logo" />
+                <Link to='/ItemListContainer'><img src={logo} alt="logo"  className="logo" /></Link>
             </div>
         <div className='d-flex justify-content-end barra'>
         <Nav tabs>
@@ -44,7 +44,7 @@ const NavBar = () =>{
         
     </div>
     </div>
-    </>
+    </div>
     )
 }
 
