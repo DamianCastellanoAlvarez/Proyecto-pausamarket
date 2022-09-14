@@ -1,9 +1,10 @@
 import { useContext } from "react"
+import { Link } from "react-router-dom"
 import { CartContext } from "../context/CartContext"
 
 export const Cart = () => {
 
-    const {cart, cartTotal, emptyCart, cartQuantity, isInCart} = useContext(CartContext)
+    const {cart, cartTotal, emptyCart } = useContext(CartContext)
 
     
 

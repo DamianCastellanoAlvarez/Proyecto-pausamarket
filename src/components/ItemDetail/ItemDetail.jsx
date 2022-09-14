@@ -3,22 +3,30 @@ import { Card, CardBody, CardHeader, CardText, CardTitle } from "reactstrap";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
-
+import Contador from '../ItemCount/ItemCount'
 
 const ItemDetail = ( {item} ) => {
     const { name, price, img, stock } = item;
-    const {addToCart, isInCart} = useContext(CartContext)
-    const [cuenta, setCuenta] = useState(1)
-    const [add, setAdd] = useState (false)
-    const {cart, cartTotal, emptyCart, cartQuantity} = useContext(CartContext)
+    const [cantidad, setCantidad] = useState(1)
+    const {addToCart, isInCart, cart} = useContext(CartContext)
+    
+    
+    
 
-    const agregaralcarrito = () =>{
+    const handleAgregar = () => {
         const itemToCart = {
             id: item.id,
             nombre: item.name,
-            Precio: item.price
+            precio: item.price,
+            img: item.img,
+            
+
+            
+
         }
         addToCart(itemToCart)
+        
+        
     }
 
     return(
@@ -42,17 +50,16 @@ const ItemDetail = ( {item} ) => {
                             {price}
                         </CardTitle>
                             <div className="detalle d-flex justify-content-center">
-                            <ItemCount 
-                            cart={cart}
-                            initial={1} 
-                            stock={stock} 
-                            addToCart={addToCart} 
-                            cuenta={agregaralcarrito}
-                            setCounter= {setCuenta} />
-                            </div>        
+                                <ItemCount 
+                                
+                                initial={1} 
+                                counter= {cantidad} 
+                                cantMax= {item.stock}
+                                agregar={handleAgregar} 
+                                setCounter= {setCantidad}/>
+                            </div>
                         </CardBody>
                         <div className="d-flex justify-content-evenly">
-                            
                             <Link to='/cart'><button className="btn btn-info">Finalizar Compra</button></Link>
                         </div>
                 </Card>
