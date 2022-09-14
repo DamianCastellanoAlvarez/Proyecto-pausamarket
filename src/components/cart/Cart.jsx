@@ -1,6 +1,6 @@
 import { useContext } from "react"
-import { Link } from "react-router-dom"
 import { CartContext } from "../context/CartContext"
+import '../cart/Cart'
 
 export const Cart = () => {
 
@@ -10,15 +10,16 @@ export const Cart = () => {
 
     return(
         <div>
-            <h2>CARRITO !</h2>
-
+            <h2>Productos Seleccionados!</h2>
+            <div className='d-flex justify-content-start'>
             {cart.map((item) =>
             <div key= {item.id}>
                 <h1>{item.name}</h1>
-                <p>{item.stock}</p>
-                <img src={item.img}/>
+                
+                    <img width="350" src={item.img}/>
                 
             </div> )}
+            </div>
             <h4>Total: ${cartTotal()}</h4>
             <button onClick={emptyCart}>Vaciar Carrito</button>
         </div>

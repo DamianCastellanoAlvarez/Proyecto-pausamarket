@@ -2,7 +2,7 @@ import '../ItemCount/ItemCount.css';
 
 
 
-const ItemCount = ({counter, agregar, setCounter, cantMax}) => {
+const ItemCount = ({counter, agregar, setCounter, cantMax, stock}) => {
 
     
     
@@ -18,6 +18,7 @@ const ItemCount = ({counter, agregar, setCounter, cantMax}) => {
         setCounter(counter + 1)
     }
 
+    
     return (
         <div className="justify-content-evenly">
             <div className="d-flex justify-content-evenly">

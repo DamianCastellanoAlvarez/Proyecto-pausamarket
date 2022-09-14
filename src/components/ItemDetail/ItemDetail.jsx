@@ -3,12 +3,11 @@ import { Card, CardBody, CardHeader, CardText, CardTitle } from "reactstrap";
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
-import Contador from '../ItemCount/ItemCount'
 
 const ItemDetail = ( {item} ) => {
     const { name, price, img, stock } = item;
     const [cantidad, setCantidad] = useState(1)
-    const {addToCart, isInCart, cart} = useContext(CartContext)
+    const {addToCart, isInCart} = useContext(CartContext)
     
     
     
@@ -16,17 +15,11 @@ const ItemDetail = ( {item} ) => {
     const handleAgregar = () => {
         const itemToCart = {
             id: item.id,
-            nombre: item.name,
-            precio: item.price,
+            name: item.name,
+            price: item.price,
             img: item.img,
-            
-
-            
-
         }
         addToCart(itemToCart)
-        
-        
     }
 
     return(
@@ -51,10 +44,9 @@ const ItemDetail = ( {item} ) => {
                         </CardTitle>
                             <div className="detalle d-flex justify-content-center">
                                 <ItemCount 
-                                
                                 initial={1} 
                                 counter= {cantidad} 
-                                cantMax= {item.stock}
+                                cantMax= {stock}
                                 agregar={handleAgregar} 
                                 setCounter= {setCantidad}/>
                             </div>
