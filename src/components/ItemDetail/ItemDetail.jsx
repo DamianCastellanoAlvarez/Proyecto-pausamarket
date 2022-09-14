@@ -12,12 +12,13 @@ const ItemDetail = ( {item} ) => {
     
     
 
-    const handleAgregar = () => {
+    const agregar = () => {
         const itemToCart = {
             id: item.id,
             name: item.name,
             price: item.price,
             img: item.img,
+            cantidad,
         }
         addToCart(itemToCart)
     }
@@ -47,8 +48,9 @@ const ItemDetail = ( {item} ) => {
                                 initial={1} 
                                 counter= {cantidad} 
                                 cantMax= {stock}
-                                agregar={handleAgregar} 
-                                setCounter= {setCantidad}/>
+                                agregar={agregar} 
+                                setCounter= {setCantidad}
+                                addToCart={addToCart}/>
                             </div>
                         </CardBody>
                         <div className="d-flex justify-content-evenly">

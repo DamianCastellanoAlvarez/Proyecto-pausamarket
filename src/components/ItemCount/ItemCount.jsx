@@ -2,7 +2,7 @@ import '../ItemCount/ItemCount.css';
 
 
 
-const ItemCount = ({counter, agregar, setCounter, cantMax, stock}) => {
+const ItemCount = ({counter, agregar, setCounter, cantMax}) => {
 
     
     

@@ -1,7 +1,7 @@
 
 const stock = [
     { name: ' Yerba', 
-    price: " $500", 
+    price: 500, 
     descripcion: "DIGESTIVO - ANALGESICO - ANSIOLÍTICO", 
     img:'https://i.imgur.com/AWUS8Ym.jpg', 
     id: 1, 
@@ -11,7 +11,7 @@ const stock = [
 },
 
     { name: ' Stevia', 
-    price: " $300", 
+    price: 300, 
     descripcion: "Antidiabética - Antioxidante - Antitumoral", 
     img:'https://i.imgur.com/y34PFWv.jpg', 
     id: 2,
@@ -20,7 +20,7 @@ const stock = [
     detalle:'Es un blend que propone un momento de quietud y armonía cada día, para terminar nuestras tardes en estado de serenidad y poder conciliar un sueño reparador. Acompáñalo de una meditación de 10 minutos. Nuestro blend nos remonta a los aromas de azahar de nuestra querida ciudad de Tafí Viejo en temporada que cada año moviliza a todo un pueblo trabajador. Disfruta de este homenaje, te invitamos a transportarte a nuestra tierra. Ingredientes: Té verde, Manzanilla, Flor de caléndula. Beneficios generales. Por las propiedades de las hierbas que componen este blend, sus beneficios son: Colabora en tratar la ansiedad y el nerviosismo. Ayuda a bajar el nivel de colesterol y el azúcar. Contribuye a aliviar problemas digestivos. Tiene propiedades antiinflamatorias, antioxidantes y hepatoprotectoras. Ayuda a estimular el sistema inmune. Precauciones: Recuerda que nuestros productos no son medicamentos. Tienen propiedades saludables pero no son remedios. Si crees que puede ayudarte con una patología consulta con tu médico. No debe usarse en el embarazo o lactancia, ni en niños menores de un año. No consumir en exceso. ¿Cómo utilizar el blend Calma?. Puede utilizarse como infusión de té caliente o fría, también consumir en el mate. Tiempo de infusión: 3 minutos. Cantidad: 1 cucharada de té por taza. Para el mate agregar a gusto pero se recomienda también 1 cucharada de té sobre la yerba.'
 },
     { name: ' Te', 
-    price: " $400", 
+    price: 400, 
     descripcion: "Te verde - Manzanilla - Flor de Calendula", 
     img:'https://i.imgur.com/3CCfonZ.jpg', 
     id: 3,
