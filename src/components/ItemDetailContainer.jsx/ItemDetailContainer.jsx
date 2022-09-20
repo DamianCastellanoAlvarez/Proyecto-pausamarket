@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { Spinner } from 'reactstrap';
-import Pedirdatos from '../../helpers/pedirdatos';
 import ItemDetail from "../ItemDetail/ItemDetail";
-
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from "../firebase/config";
 
 
 const ItemDetailContainer = () => {
@@ -14,19 +14,15 @@ const ItemDetailContainer = () => {
 
     useEffect(() => {
         setloading(true)
-        Pedirdatos()
-            .then( (res) => {
-                if(!itemId){
-                setItem(res)
-            }else{setItem(res.find((prod)=> prod.id === Number(itemId)))
-            }})
-            .catch( (error) => {
-                console.log(error)
+        const docRef = doc (db, 'productos', itemId )
+        getDoc(docRef)
+            .then((doc) => {
+                setItem({id: doc.id, ...doc.data()})
             })
-            .finally(() => {
+            .finally(() =>{
                 setloading(false)
             })
-    }, [itemId])
+    }, [])
 
     if(loading){
         return (
