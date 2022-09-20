@@ -16,22 +16,22 @@ const ItemListContainer = () => {
     
     useEffect(() => {
         setLoading(true)
-  
-        Pedirdatos()
-           .then( (res) => {
-              if (!categoryId) {
-                 setProductos(res)
-              }else{
-                 setProductos(res.filter ((prod) => prod.categoria === categoryId))
-              }
-           })
-           .catch( (error) => {
-                 console.log(error)
-           })
-           .finally(() => {
-              setLoading(false)
-           })
-     }, [categoryId])
+
+            Pedirdatos()
+            .then( (res) => {
+                if (!categoryId) {
+                    setProductos(res)
+                }else{
+                    setProductos(res.filter ((prod) => prod.categoria === categoryId))
+                }
+            })
+            .catch( (error) => {
+                    console.log(error)
+            })
+            .finally(() => {
+                setLoading(false)
+            })
+        }, [categoryId])
     
 if(loading){
     return (
