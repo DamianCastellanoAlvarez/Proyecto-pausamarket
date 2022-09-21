@@ -26,7 +26,7 @@ export const Cart = () => {
             </div> )}
             </div>
             <h2> Unidades: {cartQuantity()}</h2>
-            <h4>Total: {cartTotal()}</h4> 
+            <h4>Total: ${cartTotal()}</h4> 
             <button onClick={emptyCart}>Vaciar Carrito</button>
             <div className="btn btn-success mx-2">Comprar</div>
             </div>

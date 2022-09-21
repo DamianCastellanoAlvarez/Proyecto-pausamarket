@@ -7,7 +7,7 @@ import { CartContext } from "../context/CartContext";
 const ItemDetail = ( {item} ) => {
     const { name, price, img, stock } = item;
     const [cantidad, setCantidad] = useState(1)
-    const {addToCart, isInCart} = useContext(CartContext)
+    const {addToCart, cart} = useContext(CartContext)
     
     
     
@@ -54,8 +54,10 @@ const ItemDetail = ( {item} ) => {
                             </div>
                         </CardBody>
                         <div className="d-flex justify-content-evenly">
-                            <Link to='/cart'><button className="btn btn-info">Finalizar Compra</button></Link>
-                        </div>
+                            {
+                            cart.length === 0 ? "" : <Link to='/cart'><button className="btn btn-info">Finalizar Compra</button></Link>
+                            }
+                            </div>
                 </Card>
             </div>
                 <div className="d-flex justify-content-end">
