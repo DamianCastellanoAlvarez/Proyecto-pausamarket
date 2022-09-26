@@ -4,12 +4,10 @@ import logo from '../../assets/Logo.png'
 import { Link } from "react-router-dom"
 import '../NavBar/NavBar.css'
 import CartWidget from "../CartWidget/CartWidget.jsx"
-import { useLoginContext } from '../context/LoginContext';
 
 const NavBar = () =>{
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
-    const {user, logout} = useLoginContext()
 
     const toggle = () => setDropdownOpen(!dropdownOpen);
 
@@ -36,13 +34,10 @@ const NavBar = () =>{
             <NavItem>
             <NavLink href='/contacto'>Contacto</NavLink>
             </NavItem>
-            <div>
+            
             <Link to="/cart"> <CartWidget /> </Link>
-            </div>
-            <div className='header-user'>
-                <small>Bienvenido: {user.user}</small>
-                <button onClick={logout} className='btn btn-outline-danger'>Logout</button>
-            </div>
+            
+            
         </Nav>
 
         

@@ -1,13 +1,14 @@
-import {createContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import Swal from 'sweetalert2'
 
 
 
 export const CartContext = createContext()
 
+
 export const CartProvider = ({children}) => {
     
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = useState()
 
     const addToCart = (item) => {
         setCart ([...cart, item])
@@ -40,7 +41,8 @@ export const CartProvider = ({children}) => {
         })
     
     };
-
+    
+    
     const emptyCart = () => {
         Swal.fire({
             title: 'Estas seguro?',
@@ -56,18 +58,30 @@ export const CartProvider = ({children}) => {
             }
         })
 
+        
+        
+
+            
+            
+
+
     }
     return (
         <CartContext.Provider value={{
+
             cart,
             addToCart,
             isInCart,
             cartQuantity,
             cartTotal,
-            eliminarItem,
-            emptyCart
+            emptyCart,
+            eliminarItem
         }}>
             {children}
         </CartContext.Provider>
     )
+}
+
+export const useCartContext = () => {
+    return useContext(CartContext)
 }

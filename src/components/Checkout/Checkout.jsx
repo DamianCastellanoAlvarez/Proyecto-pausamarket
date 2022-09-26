@@ -1,13 +1,13 @@
 import { useState } from "react"
 import { Navigate } from "react-router-dom"
-import { useCartContext } from "../../context/CartContext"
+import { useCartContext } from '../context/CartContext'
 import { addDoc, collection, getDocs, writeBatch, query, where, documentId } from 'firebase/firestore'
-import { db } from "../../firebase/config"
-import { useForm } from "../../hooks/useForm"
+import { db } from "../firebase/config"
+import { useForm } from '../hooks/useForm'
 
 const Checkout = () => {
 
-    const { cart, cartTotal, pagar } = useCartContext()
+    const { cart, cartTotal, terminarCompra } = useCartContext()
 
     const [orderId, setOrderId] = useState(null)
 
@@ -66,7 +66,7 @@ const Checkout = () => {
                         .then((doc) => {
                             console.log(doc.id)
                             setOrderId(doc.id)
-                            pagar()
+                            terminarCompra()
                         })
                 })
         } else {

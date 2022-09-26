@@ -1,6 +1,6 @@
 import { useContext } from "react"
-import { LoginContext } from "../../context/LoginContext"
-import { useForm } from "../../hooks/useForm"
+import { LoginContext } from '../context/LoginContext'
+import { useForm } from '../hooks/useForm'
 
 const LoginScreen = () => {
 
