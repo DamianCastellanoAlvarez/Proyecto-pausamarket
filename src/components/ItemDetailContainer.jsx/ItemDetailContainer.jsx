@@ -4,7 +4,7 @@ import { Spinner } from 'reactstrap';
 import ItemDetail from "../ItemDetail/ItemDetail";
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from "../firebase/config";
-
+import Loader from "../Loader/Loader";
 
 const ItemDetailContainer = () => {
     const [item, setItem] = useState({})
@@ -40,7 +40,11 @@ const ItemDetailContainer = () => {
 
     return (
         <>
-            <ItemDetail item={item} />
+            {
+                loading
+                ? <Loader/>
+                : <ItemDetail item={item} />
+            }
         </>
     );
 }
