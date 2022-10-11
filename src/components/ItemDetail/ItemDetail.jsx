@@ -53,10 +53,10 @@ const ItemDetail = ( {item} ) => {
                                 addToCart={addToCart}/>
                             </div>
                         </CardBody>
-                        <div className="d-flex justify-content-evenly">
-                            {
-                            cart.length === 0 ? "" : <Link to='/cart'><button className="btn btn-info">Finalizar Compra</button></Link>
-                            }
+                            <div className="d-flex justify-content-evenly">
+                                {
+                                    cart.length === 0 ? "" : <Link to='/cart'><button className="btn btn-info">Finalizar Compra</button></Link>
+                                }                       
                             </div>
                 </Card>
             </div>

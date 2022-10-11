@@ -1,134 +1,65 @@
-import { useState } from "react"
-import { Navigate } from "react-router-dom"
-import { useCartContext } from '../context/CartContext'
-import { addDoc, collection, getDocs, writeBatch, query, where, documentId } from 'firebase/firestore'
-import { db } from "../firebase/config"
-import { useForm } from '../hooks/useForm'
+import React, {useContext, useState} from "react";
+import { CartContext } from "../context/CartContext";
+import {addDoc, collection, getFirestore} from 'firebase/firestore'
 
-const Checkout = () => {
 
-    const { cart, cartTotal, terminarCompra } = useCartContext()
+export default function Checkout() {
+  const { cartTotal, cart, fincompra} = useContext(CartContext);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [tel, setTel] = useState('');
+  const [orderId, setOrderId] = useState('')
+  
+  function validateForm(){
+    const order = {
+      buyer: {name, tel, email},
+      cart,
+    };
 
-    const [orderId, setOrderId] = useState(null)
+    const db = getFirestore()
+    const orders = collection(db, 'orders');
+    addDoc(orders, order).then(({id})=>{
+      setOrderId(id);
+      fincompra()
+    });
+  }
 
-    const { values, handleInputChange } = useForm({
-        nombre: '',
-        email: '',
-        direccion: '',
-    })
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        const orden = {
-            comprador: values,
-            items: cart,
-            total: cartTotal()
-        }
-        
-
-        if (values.nombre.length < 2) {
-            alert("Nombre incorrecto")
-            return
-        }
-
-        if (values.email.length < 2) { 
-            alert("Email incorrecto")
-            return 
-        }
-
-        const batch = writeBatch(db)
-        const ordenesRef = collection(db, 'ordenes')
-        const productosRef = collection(db, 'productos')
-    
-        const q = query(productosRef, where(documentId(), 'in', cart.map(item => item.id)))
-
-        const productos = await getDocs(q)
-
-        const outOfStock = []
+  return (
+    <>
+      <div className="text-center h3 text-info bg-dark">
+        {
+          orderId 
+          ? ( "Gracias por confiar en Pausa Market!! Tu codigo de compra es : " + orderId 
+          ) : ( 
             
-        productos.docs.forEach((doc) => {
-            const itemInCart = cart.find(item => item.id === doc.id)
-
-            if (doc.data().stock >= itemInCart.cantidad) {
-                batch.update(doc.ref, {
-                    stock: doc.data().stock - itemInCart.cantidad
-                })
-            } else {
-                outOfStock.push(itemInCart)
-            }
-        })
-
-        if (outOfStock.length === 0) {
-            batch.commit()
-                .then(() => {
-                    addDoc(ordenesRef, orden)
-                        .then((doc) => {
-                            console.log(doc.id)
-                            setOrderId(doc.id)
-                            terminarCompra()
-                        })
-                })
-        } else {
-            
-            alert("Producto sin stock")
-            console.log(outOfStock)
-        }
-
-    }
-
-    if (orderId) {
-        return (
-            <div className="container my-5">
-                <h2>Compra exitosa!</h2>
-                <hr/>
-                <p>Tu número de orden es: <strong>{orderId}</strong></p>
+        <div>
+          <h1>Terminar compra, ingrese datos</h1>
+          <br></br>
+          <form class="row gy-2 gx-3 align-items-center">
+                  <div class="col-auto">
+                      <label class="visually-hidden" for="autoSizingInput">Name</label>
+                      <input type="text" class="form-control" id="autoSizingInput" placeholder="Nombre" onChange={(e)=>setName (e.target.value)}/>
+                    </div>
+                    <div class="col-auto">
+                      <label class="visually-hidden" for="autoSizingInput">Telefono</label>
+                      <input type="text" class="form-control" id="autoSizingInput" placeholder="Telefono" onChange={(e)=>setTel (e.target.value)}/>
+                    </div>
+                    <div class="col-auto">
+                    <label class="visually-hidden" for="autoSizingInputGroup">Username</label>
+                    <div class="input-group">
+                      <div class="input-group-text">@</div>
+                      <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="Email" onChange={(e)=>setEmail (e.target.value)}/>
+                    </div>
+                  </div>
+          </form>
+          <br></br>
+            <div class="col-auto">
+              <button type="submit" class="btn btn-primary"onClick={validateForm}>Terminar Compra</button>
             </div>
-        )
-    }
-
-    if (cart.length === 0) {
-        return <Navigate to="/"/>
-    }
-
-    return (
-        <div className="container my-5">
-            <h2>Checkout</h2>
-            <hr/>
-
-            <form onSubmit={handleSubmit}>
-                <input 
-                    name="nombre"
-                    onChange={handleInputChange}
-                    value={values.nombre}
-                    type={'text'} 
-                    className="my-3 form-control" 
-                    placeholder="Tu nombre"
-                />
-
-                <input 
-                    name="email"
-                    onChange={handleInputChange}
-                    value={values.email}
-                    type={'email'} 
-                    className="my-3 form-control" 
-                    placeholder="Email"
-                />
-
-                <input 
-                    name="direccion"
-                    onChange={handleInputChange}
-                    value={values.direccion}
-                    type={'text'} 
-                    className="my-3 form-control" 
-                    placeholder="Dirección"
-                />
-
-                <button type="submit" className="btn btn-primary">Enviar</button>
-            </form>
-
         </div>
+          )}
+          </div>
+    </>
     )
 }
-
-export default Checkout

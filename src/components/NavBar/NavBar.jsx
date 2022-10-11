@@ -34,7 +34,6 @@ const NavBar = () =>{
             <NavItem>
             <NavLink href='/contacto'>Contacto</NavLink>
             </NavItem>
-            
             <Link to="/cart"> <CartWidget /> </Link>
             
             

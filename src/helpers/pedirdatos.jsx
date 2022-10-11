@@ -8,7 +8,7 @@ const Pedirdatos = () => {
                 resolve(productos)
             }
             reject("ERROR")
-        },2000)
+        },1000)
     }) 
 }
 
